@@ -1,0 +1,1 @@
+{"timestamp":"2026-07-30T05:14:24+07:00","run":"agent-zero-extraction","tier":"XS","status":"PASS","aggregateRating":94,"ratings":{"plan":93,"implementation":94,"verifier":96,"checkpoint":94},"evidence":["npm test","reports/agent-zero-extraction.html"],"lessons":["Separate the intent-holder from execution substrates and shared services."]}

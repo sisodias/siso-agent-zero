@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SISO Agent Zero — Architecture</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0a0d12;--panel:#121823;--line:#2a3546;--text:#edf2f7;--muted:#9caabe;--accent:#72e3b1;--blue:#75b7ff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,sans-serif}main{max-width:980px;margin:auto;padding:48px 24px 80px}h1{font-size:clamp(2rem,6vw,4rem);line-height:1.02;margin:.2em 0}h2{margin-top:2.4em}p,li{max-width:76ch}.eyebrow{color:var(--accent);letter-spacing:.12em;text-transform:uppercase}.muted{color:var(--muted)}.flow{display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:12px;margin:28px 0}.node{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}.node strong{display:block;color:var(--accent);margin-bottom:6px}.arrow{display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1.5rem}.contract{border-left:4px solid var(--accent);padding:14px 18px;background:var(--panel);margin:18px 0}table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{text-align:left;vertical-align:top;border:1px solid var(--line);padding:12px}code{color:var(--accent)}@media(max-width:760px){.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}
+  </style>
+</head>
+<body><main>
+  <p class="eyebrow">The Great Library of SISO · Agents</p>
+  <h1>Agent Zero holds intent. It does not own the stack.</h1>
+  <p class="muted">Architecture snapshot · 2026-07-30 · a revisable hypothesis backed by the first public extraction</p>
+
+  <div class="flow" aria-label="Agent Zero operating flow">
+    <div class="node"><strong>Human</strong>Intent, priorities, authority.</div><div class="arrow">→</div>
+    <div class="node"><strong>Agent Zero</strong>Identity + current boot packet + coordination policy.</div><div class="arrow">→</div>
+    <div class="node"><strong>Agent host</strong>The explicitly chosen CLI or model runtime executes a turn.</div>
+  </div>
+
+  <div class="flow" aria-label="Agent Zero dependencies">
+    <div class="node"><strong>Agent Brain</strong>Current tasks, memory, fleet, questions, divisions, halt state.</div><div class="arrow">→</div>
+    <div class="node"><strong>Agent Zero</strong>Reads by default; announces boot only when explicitly enabled.</div><div class="arrow">→</div>
+    <div class="node"><strong>Operating stack</strong>Project OS, Skills, Playbooks, Agent Runtime, and Herdr remain independent Works.</div>
+  </div>
+
+  <h2>First-principles boundary</h2>
+  <div class="contract"><strong>Repository test:</strong> if the Agent Brain, model host, or Herdr changes independently, Agent Zero should not need to fork their source. It should adapt through a documented command or environment contract.</div>
+  <table>
+    <thead><tr><th>Concern</th><th>Home</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Identity, rehydration, intent continuity</td><td>This repository</td><td>These create the Agent Zero outcome and version together.</td></tr>
+      <tr><td>Persistent state and memory API</td><td>Agent Brain</td><td>Many agents can consume it; its storage and schema lifecycle are independent.</td></tr>
+      <tr><td>Model execution and session lifecycle</td><td>Agent Runtime / host CLI</td><td>Agent Zero is policy around a host, not another model runtime.</td></tr>
+      <tr><td>Workspace and pane persistence</td><td>Herdr</td><td>Herdr is a general substrate used beyond Agent Zero.</td></tr>
+      <tr><td>Atomic capabilities and scenarios</td><td>Skills Hub / Agent Playbook</td><td>Agent Zero selects and coordinates them; it does not own their implementations.</td></tr>
+      <tr><td>Project-local rules and tasks</td><td>Project OS</td><td>The project owns its working contract; Agent Zero reads and respects it.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Safety and portability</h2>
+  <ul>
+    <li>The default operation prints a boot packet and performs no host execution.</li>
+    <li>Write-side brain announcements require <code>--announce</code>.</li>
+    <li>Host execution requires <code>--exec</code> and uses an argument array without a shell.</li>
+    <li>No provider credential, personal endpoint, personal path, or implicit permission bypass belongs in source.</li>
+    <li>Machine-specific adapters are opt-in and removable.</li>
+  </ul>
+
+  <h2>How this evolves</h2>
+  <p>This diagram is a versioned projection, not permanent ontology. Future evidence may move an adapter, split a policy, or introduce another Work. The stable identity is the outcome: Agent Zero wakes with current state, holds human intent, and coordinates through explicit external contracts.</p>
+</main></body></html>

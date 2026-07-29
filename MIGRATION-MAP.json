@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "observed_at": "2026-07-30",
+  "source_boundary": "$SISO_WORKSPACE/SISO_Agent_Base/extensions/agent-zero",
+  "modules": [
+    {
+      "source": "az-boot.py + agent-zero",
+      "destination": "src/agent_zero.py + bin/siso-agent-zero + config/identity.md",
+      "state": "promoted",
+      "reason": "Together they implement the independently useful Agent Zero identity, rehydration, and explicit host handoff."
+    },
+    {
+      "source": "open-siso-base.sh",
+      "destination": "adapters/cmux/open-siso-base.sh",
+      "state": "promoted_as_optional_adapter",
+      "reason": "It is useful but not part of the coordination identity; all endpoint and executable choices are now environment contracts."
+    },
+    {
+      "source": "az-voice.sh",
+      "destination": null,
+      "state": "deferred",
+      "candidate_home": "siso-agent-zero/adapters/voice",
+      "reason": "It still couples a microphone stack, Whisper, one agent host, macOS speech, and write-side brain behavior."
+    },
+    {
+      "source": "az-autobuild.py",
+      "destination": null,
+      "state": "deferred",
+      "candidate_home": "future agent-automation policy Work",
+      "reason": "Self-modification, authority gates, task selection, database schema access, and Herdr execution need an independently testable contract."
+    },
+    {
+      "source": "new-agent.sh",
+      "destination": null,
+      "state": "reclassified",
+      "candidate_home": "SISO Project OS or future agent-organization Work",
+      "reason": "It scaffolds project organization and agent homes; it is not Agent Zero boot or coordination identity."
+    }
+  ]
+}

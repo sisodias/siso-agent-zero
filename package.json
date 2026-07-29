@@ -1,0 +1,10 @@
+{
+  "name": "siso-agent-zero",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Intent-holding coordination and boot package for the SISO Agent Stack.",
+  "scripts": {
+    "test": "python3 scripts/check_repo.py"
+  },
+  "license": "MIT"
+}
