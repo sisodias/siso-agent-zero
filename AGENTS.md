@@ -1,5 +1,7 @@
 # Agent guide
 
+**In one line:** Coordination layer that builds a boot packet from an agent brain, joins it to a durable identity and hands it to a chosen host. District: `SISO_Agents` (`~/SISO_Workspace/SISO_Agents/siso-agent-zero`).
+
 SISO Agent Zero is a coordination-policy and boot package. Preserve that boundary.
 
 - Keep model hosts, Herdr, Agent Brain, Skills, Playbooks, and Project OS as external contracts.
