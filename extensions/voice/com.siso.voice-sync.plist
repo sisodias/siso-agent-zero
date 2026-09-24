@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.siso.voice-sync</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/shaansisodia/SISO_Workspace/SISO_Agents/agent-zero/siso-agent-zero/extensions/voice/voice-sync.py</string>
+  </array>
+  <key>RunAtLoad</key><true/>
+  <key>StartInterval</key><integer>60</integer>
+  <key>StandardOutPath</key><string>/Users/shaansisodia/.siso/logs/voice-sync.out.log</string>
+  <key>StandardErrorPath</key><string>/Users/shaansisodia/.siso/logs/voice-sync.err.log</string>
+</dict></plist>

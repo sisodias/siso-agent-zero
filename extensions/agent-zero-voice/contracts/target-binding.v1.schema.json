@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "siso://agent-zero-voice/target-binding.v1",
+  "title": "TargetBinding v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["machine", "workspace_label", "tab_label", "terminal_id", "pane_id", "cwd", "role", "task_marker", "role_evidence_sha256", "agent_status", "registry_version", "resolved_at", "expires_at", "stale_hint_detected"],
+  "properties": {
+    "machine": {"const": "laptop"},
+    "workspace_label": {"type": "string", "minLength": 1},
+    "tab_label": {"type": "string", "minLength": 1},
+    "pane_id": {"type": "string", "minLength": 1},
+    "terminal_id": {"type": "string", "minLength": 1},
+    "role": {"type": "string", "minLength": 1},
+    "task_marker": {"type": ["string", "null"], "pattern": "^TASK-[0-9]{4,}(?:\\.[0-9]+)?$"},
+    "cwd": {"type": "string", "minLength": 1},
+    "role_evidence_sha256": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "agent_status": {"type": "string", "minLength": 1},
+    "registry_version": {"type": "string", "minLength": 1},
+    "resolved_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "stale_hint_detected": {"type": "boolean"}
+  }
+}

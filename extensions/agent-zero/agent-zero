@@ -1,0 +1,36 @@
+#!/bin/zsh
+# agent-zero — launch the one agent you talk to.
+# Boots from the brain (no amnesia), then drops you into a Claude session
+# pre-loaded with the live ecosystem briefing.
+#
+# Usage:  agent-zero            # interactive: briefing -> claude session
+#         agent-zero --brief    # just print the boot briefing and exit
+#         agent-zero "do X"     # one-shot: briefing + your prompt -> claude -p
+set -e
+AZ_DIR="${0:A:h}"
+BOOT="$AZ_DIR/az-boot.py"
+ID="agent-zero"
+
+BRIEF="$(python3 "$BOOT" --id "$ID")"
+
+if [[ "$1" == "--brief" ]]; then
+  echo "$BRIEF"; exit 0
+fi
+
+IDENTITY="You are agent-zero, the single agent Shaan talks to. You coordinate the entire SISO agent fleet across all machines (MacBook, Mac Mini brain host, Hetzner VPS) via the one brain. Read/write it with the \`siso-brain\` CLI (siso-brain fleet|tasks|memory-recall|memory-write|timeline|cost). Delegate execution to orchestrators/workers; you hold judgment + memory, not bulk execution. Honor the autonomy tiers (T0/T1 ungated, T2 propose+approve, T3 always gated). Record decisions to memory and progress to the timeline as you work."
+
+PROMPT="$IDENTITY
+
+--- LIVE BOOT BRIEFING (read this; it is your current situational awareness) ---
+$BRIEF
+--- end briefing ---"
+
+if [[ -n "$1" ]]; then
+  # one-shot mode
+  echo "$PROMPT
+
+TASK: $*" | claude -p --dangerously-skip-permissions
+else
+  # interactive: hand the briefing in as the opening context
+  echo "$PROMPT" | claude --dangerously-skip-permissions
+fi

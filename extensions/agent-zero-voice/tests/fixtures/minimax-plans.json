@@ -1,0 +1,62 @@
+{
+  "accepted": {
+    "request_id": "req-minimax-plan",
+    "turn_id": "turn-minimax-plan",
+    "transcript_hash": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+    "intent": "plan_minimax_fanout",
+    "goal": "Inspect three independent document groups and synthesize centrally",
+    "task_id": "TASK-9002",
+    "risk_tier": "T1",
+    "confirmation": "voice_confirmed",
+    "confidence": 0.97,
+    "constraints": ["read only", "no live systems", "coordinator makes final decision"],
+    "target_hint": null,
+    "minimax_slices": [
+      {
+        "slice_id": "skills",
+        "objective": "Inventory bounded skill contracts",
+        "source_paths": ["templates/profile/skills"],
+        "output_path": "research/agent-zero-voice-runs/TASK-9002/skills.json",
+        "independent": true,
+        "read_only": true,
+        "self_fan_out": false,
+        "touches_live_systems": false,
+        "final_decision_maker": false
+      },
+      {
+        "slice_id": "tasks",
+        "objective": "Inventory bounded task conventions",
+        "source_paths": ["docs"],
+        "output_path": "research/agent-zero-voice-runs/TASK-9002/tasks.json",
+        "independent": true,
+        "read_only": true,
+        "self_fan_out": false,
+        "touches_live_systems": false,
+        "final_decision_maker": false
+      },
+      {
+        "slice_id": "voice",
+        "objective": "Inventory bounded voice conventions",
+        "source_paths": ["extensions/voice"],
+        "output_path": "research/agent-zero-voice-runs/TASK-9002/voice.json",
+        "independent": true,
+        "read_only": true,
+        "self_fan_out": false,
+        "touches_live_systems": false,
+        "final_decision_maker": false
+      }
+    ],
+    "dry_run": true
+  },
+  "rejections": [
+    {"name": "conflicting outputs", "slice": 1, "field": "output_path", "value": "research/agent-zero-voice-runs/TASK-9002/skills.json", "expected_code": "conflicting_output"},
+    {"name": "dependent slice", "slice": 0, "field": "independent", "value": false, "expected_code": "dependent_slice"},
+    {"name": "worker write scope", "slice": 0, "field": "read_only", "value": false, "expected_code": "write_scope_rejected"},
+    {"name": "self fan-out", "slice": 0, "field": "self_fan_out", "value": true, "expected_code": "self_fanout_rejected"},
+    {"name": "live system mutation", "slice": 0, "field": "touches_live_systems", "value": true, "expected_code": "live_system_rejected"},
+    {"name": "worker final decision", "slice": 0, "field": "final_decision_maker", "value": true, "expected_code": "worker_decision_rejected"},
+    {"name": "output outside task run", "slice": 0, "field": "output_path", "value": "research/skills.json", "expected_code": "output_not_dedicated"},
+    {"name": "unsafe output path", "slice": 0, "field": "output_path", "value": "../research/skills.json", "expected_code": "unsafe_output_path"},
+    {"name": "worker consumes peer output", "slice": 1, "field": "source_paths", "value": ["research/agent-zero-voice-runs/TASK-9002/skills.json"], "expected_code": "conflicting_write_read_path"}
+  ]
+}

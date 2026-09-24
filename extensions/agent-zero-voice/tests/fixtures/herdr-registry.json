@@ -1,0 +1,82 @@
+{
+  "registry_version": "fixture-v1",
+  "workspaces": [
+    {"workspace_id": "ws-base", "label": "SISO Agent Base"}
+  ],
+  "tabs": [
+    {"tab_id": "tab-current", "workspace_id": "ws-base", "label": "research-lane"},
+    {"tab_id": "tab-stale", "workspace_id": "ws-base", "label": "legacy-lane"},
+    {"tab_id": "tab-dupe-a", "workspace_id": "ws-base", "label": "duplicate-lane"},
+    {"tab_id": "tab-dupe-b", "workspace_id": "ws-base", "label": "duplicate-lane"},
+    {"tab_id": "tab-role", "workspace_id": "ws-base", "label": "wrong-role-lane"},
+    {"tab_id": "tab-unsent", "workspace_id": "ws-base", "label": "unsent-lane"}
+  ],
+  "panes": [
+    {
+      "pane_id": "pane-current",
+      "terminal_id": "term-current",
+      "tab_id": "tab-current",
+      "agent_name": "research-worker-current",
+      "identity": {"role": "research-worker", "task_marker": "TASK-9001"},
+      "recent_content": "ROLE: research-worker\nTASK: TASK-9001\nREADY",
+      "foreground_cwd": "/Users/shaansisodia/SISO_Workspace/SISO_Agent_Base",
+      "agent_status": "idle",
+      "composer": {"is_real": true, "text": ""}
+    },
+    {
+      "pane_id": "pane-stale",
+      "terminal_id": "term-stale",
+      "tab_id": "tab-stale",
+      "agent_name": "legacy-worker",
+      "identity": {"role": "legacy-worker", "task_marker": "TASK-8999"},
+      "recent_content": "ROLE: legacy-worker\nTASK: TASK-8999",
+      "foreground_cwd": "/Users/shaansisodia/SISO_Workspace/SISO_Agent_Base",
+      "agent_status": "idle",
+      "composer": {"is_real": true, "text": ""}
+    },
+    {
+      "pane_id": "pane-dupe-a",
+      "terminal_id": "term-dupe-a",
+      "tab_id": "tab-dupe-a",
+      "agent_name": "dupe-a",
+      "identity": {"role": "research-worker", "task_marker": "TASK-9001"},
+      "recent_content": "ROLE: research-worker\nTASK: TASK-9001",
+      "foreground_cwd": "/Users/shaansisodia/SISO_Workspace/SISO_Agent_Base",
+      "agent_status": "idle",
+      "composer": {"is_real": true, "text": ""}
+    },
+    {
+      "pane_id": "pane-dupe-b",
+      "terminal_id": "term-dupe-b",
+      "tab_id": "tab-dupe-b",
+      "agent_name": "dupe-b",
+      "identity": {"role": "research-worker", "task_marker": "TASK-9001"},
+      "recent_content": "ROLE: research-worker\nTASK: TASK-9001",
+      "foreground_cwd": "/Users/shaansisodia/SISO_Workspace/SISO_Agent_Base",
+      "agent_status": "idle",
+      "composer": {"is_real": true, "text": ""}
+    },
+    {
+      "pane_id": "pane-role",
+      "terminal_id": "term-role",
+      "tab_id": "tab-role",
+      "agent_name": "coding-worker",
+      "identity": {"role": "coding-worker", "task_marker": "TASK-9001"},
+      "recent_content": "ROLE: coding-worker\nTASK: TASK-9001",
+      "foreground_cwd": "/Users/shaansisodia/SISO_Workspace/SISO_Agent_Base",
+      "agent_status": "idle",
+      "composer": {"is_real": true, "text": ""}
+    },
+    {
+      "pane_id": "pane-unsent",
+      "terminal_id": "term-unsent",
+      "tab_id": "tab-unsent",
+      "agent_name": "research-worker-draft",
+      "identity": {"role": "research-worker", "task_marker": "TASK-9001"},
+      "recent_content": "ROLE: research-worker\nTASK: TASK-9001\nREADY",
+      "foreground_cwd": "/Users/shaansisodia/SISO_Workspace/SISO_Agent_Base",
+      "agent_status": "idle",
+      "composer": {"is_real": true, "text": "already typed but not submitted"}
+    }
+  ]
+}

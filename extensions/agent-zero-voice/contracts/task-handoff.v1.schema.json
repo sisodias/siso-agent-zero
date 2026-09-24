@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "siso://agent-zero-voice/task-handoff.v1",
+  "title": "TaskHandoff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "task_id", "action_id", "outcome", "worker", "model_served", "independent_verified_by", "artifacts", "checks", "open_risks", "completed_at", "slice_id"],
+  "properties": {
+    "task_id": {"type": "string", "pattern": "^TASK-[0-9]{4,}(?:\\.[0-9]+)?$"},
+    "action_id": {"type": "string", "minLength": 1},
+    "verdict": {"enum": ["PASS", "FAIL", "BLOCKED"]},
+    "outcome": {"type": "string", "minLength": 1},
+    "worker": {"type": "string", "minLength": 1},
+    "model_served": {"type": "string", "minLength": 1},
+    "independent_verified_by": {"type": ["string", "null"]},
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["command", "exit_code", "evidence"],
+        "properties": {
+          "command": {"type": "string", "minLength": 1},
+          "exit_code": {"type": "integer"},
+          "evidence": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "open_risks": {"type": "array", "items": {"type": "string"}},
+    "completed_at": {"type": "string", "minLength": 1},
+    "slice_id": {"type": ["string", "null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"verdict": {"const": "PASS"}}},
+      "then": {
+        "properties": {
+          "artifacts": {"minItems": 1},
+          "checks": {"minItems": 1},
+          "independent_verified_by": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  ]
+}

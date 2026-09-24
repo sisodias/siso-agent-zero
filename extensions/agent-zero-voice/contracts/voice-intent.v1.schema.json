@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "siso://agent-zero-voice/voice-intent.v1",
+  "title": "VoiceIntent v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "turn_id",
+    "transcript_hash",
+    "intent",
+    "goal",
+    "task_id",
+    "risk_tier",
+    "confirmation",
+    "confidence",
+    "constraints",
+    "target_hint",
+    "minimax_slices",
+    "dry_run"
+  ],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "turn_id": {"type": "string", "minLength": 1},
+    "transcript_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "intent": {
+      "enum": ["status", "record", "delegate_existing", "check_result", "cancel_pending", "plan_minimax_fanout"]
+    },
+    "goal": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "pattern": "^TASK-[0-9]{4,}(?:\\.[0-9]+)?$"},
+    "risk_tier": {"enum": ["T0", "T1", "T2", "T3"]},
+    "confirmation": {
+      "enum": ["not_needed", "pending", "voice_confirmed", "explicit_confirmed", "high_assurance_confirmed", "denied"]
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "target_hint": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["workspace", "tab", "role"],
+      "properties": {
+        "workspace": {"type": "string", "minLength": 1},
+        "tab": {"type": "string", "minLength": 1},
+        "role": {"type": "string", "minLength": 1},
+        "task_marker": {"type": "string", "pattern": "^TASK-[0-9]{4,}(?:\\.[0-9]+)?$"},
+        "cwd": {"type": "string", "minLength": 1},
+        "remembered_pane_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "minimax_slices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slice_id", "objective", "source_paths", "output_path", "independent", "read_only", "self_fan_out", "touches_live_systems", "final_decision_maker"],
+        "properties": {
+          "slice_id": {"type": "string", "minLength": 1},
+          "objective": {"type": "string", "minLength": 1},
+          "source_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "output_path": {"type": "string", "minLength": 1},
+          "independent": {"const": true},
+          "read_only": {"const": true},
+          "self_fan_out": {"const": false},
+          "touches_live_systems": {"const": false},
+          "final_decision_maker": {"const": false}
+        }
+      }
+    },
+    "dry_run": {"const": true}
+  }
+}

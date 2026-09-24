@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "siso://agent-zero-voice/action-receipt.v1",
+  "title": "ActionReceipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["request_id", "action_id", "task_id", "state", "risk_tier", "dry_run", "message", "proof", "requires_confirmation", "target_binding", "duplicate_of", "details"],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "action_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "pattern": "^TASK-[0-9]{4,}(?:\\.[0-9]+)?$"},
+    "state": {"enum": ["needs_confirmation", "rejected", "duplicate", "dry_run_ready", "dry_run_blocked", "dry_run_admitted"]},
+    "risk_tier": {"enum": ["T0", "T1", "T2", "T3"]},
+    "dry_run": {"const": true},
+    "message": {"type": "string", "minLength": 1},
+    "proof": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "requires_confirmation": {"type": ["string", "null"]},
+    "target_binding": {"type": ["object", "null"]},
+    "duplicate_of": {"type": ["string", "null"]},
+    "details": {"type": "object"}
+  }
+}

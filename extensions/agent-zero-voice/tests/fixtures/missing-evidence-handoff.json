@@ -1,0 +1,25 @@
+{
+  "verdict": "PASS",
+  "task_id": "TASK-9002",
+  "action_id": "azv_fixture",
+  "outcome": "Claimed completion without evidence",
+  "worker": "minimax-worker-1",
+  "model_served": "minimax-m3",
+  "independent_verified_by": "independent-verifier-1",
+  "artifacts": [
+    {
+      "path": "research/agent-zero-voice-runs/TASK-9002/skills.json",
+      "sha256": "sha256:8888888888888888888888888888888888888888888888888888888888888888"
+    }
+  ],
+  "checks": [
+    {
+      "command": "fixture-check",
+      "exit_code": 0,
+      "evidence": ""
+    }
+  ],
+  "open_risks": [],
+  "completed_at": "2026-07-24T00:00:00+00:00",
+  "slice_id": "skills"
+}

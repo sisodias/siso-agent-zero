@@ -1,0 +1,170 @@
+{
+  "target_cases": [
+    {
+      "name": "stale remembered pane id is a hint, not identity",
+      "intent": {
+        "request_id": "req-stale-pane",
+        "turn_id": "turn-stale-pane",
+        "transcript_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "intent": "delegate_existing",
+        "goal": "Ask the current research worker for a bounded summary",
+        "task_id": "TASK-9001",
+        "risk_tier": "T2",
+        "confirmation": "explicit_confirmed",
+        "confidence": 0.99,
+        "constraints": ["dry run only"],
+        "target_hint": {
+          "workspace": "SISO Agent Base",
+          "tab": "research-lane",
+          "role": "research-worker",
+          "task_marker": "TASK-9001",
+          "cwd": "/Users/shaansisodia/SISO_Workspace/SISO_Agent_Base",
+          "remembered_pane_id": "pane-stale"
+        },
+        "minimax_slices": [],
+        "dry_run": true
+      },
+      "expected_state": "dry_run_ready",
+      "expected_code": "would_submit",
+      "expected_pane_id": "pane-current",
+      "expected_stale_hint": true
+    },
+    {
+      "name": "duplicate tab labels fail closed",
+      "intent": {
+        "request_id": "req-duplicate-label",
+        "turn_id": "turn-duplicate-label",
+        "transcript_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "intent": "delegate_existing",
+        "goal": "Ask the uniquely identified research worker",
+        "task_id": "TASK-9001",
+        "risk_tier": "T2",
+        "confirmation": "explicit_confirmed",
+        "confidence": 0.99,
+        "constraints": ["dry run only"],
+        "target_hint": {
+          "workspace": "SISO Agent Base",
+          "tab": "duplicate-lane",
+          "role": "research-worker",
+          "task_marker": "TASK-9001"
+        },
+        "minimax_slices": [],
+        "dry_run": true
+      },
+      "expected_state": "dry_run_blocked",
+      "expected_code": "ambiguous_target"
+    },
+    {
+      "name": "role mismatch fails closed",
+      "intent": {
+        "request_id": "req-role-mismatch",
+        "turn_id": "turn-role-mismatch",
+        "transcript_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "intent": "delegate_existing",
+        "goal": "Ask a research worker, not a coding worker",
+        "task_id": "TASK-9001",
+        "risk_tier": "T2",
+        "confirmation": "explicit_confirmed",
+        "confidence": 0.99,
+        "constraints": ["dry run only"],
+        "target_hint": {
+          "workspace": "SISO Agent Base",
+          "tab": "wrong-role-lane",
+          "role": "research-worker",
+          "task_marker": "TASK-9001"
+        },
+        "minimax_slices": [],
+        "dry_run": true
+      },
+      "expected_state": "dry_run_blocked",
+      "expected_code": "role_mismatch"
+    },
+    {
+      "name": "unsent real composer blocks retyping",
+      "intent": {
+        "request_id": "req-unsent-composer",
+        "turn_id": "turn-unsent-composer",
+        "transcript_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "intent": "delegate_existing",
+        "goal": "Do not overwrite an existing composer draft",
+        "task_id": "TASK-9001",
+        "risk_tier": "T2",
+        "confirmation": "explicit_confirmed",
+        "confidence": 0.99,
+        "constraints": ["dry run only"],
+        "target_hint": {
+          "workspace": "SISO Agent Base",
+          "tab": "unsent-lane",
+          "role": "research-worker",
+          "task_marker": "TASK-9001"
+        },
+        "minimax_slices": [],
+        "dry_run": true
+      },
+      "expected_state": "dry_run_blocked",
+      "expected_code": "unsent_composer"
+    }
+  ],
+  "duplicate_request": {
+    "request_id": "req-exact-duplicate",
+    "turn_id": "turn-exact-duplicate",
+    "transcript_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+    "intent": "status",
+    "goal": "Check the current research lane",
+    "task_id": "TASK-9001",
+    "risk_tier": "T0",
+    "confirmation": "not_needed",
+    "confidence": 0.99,
+    "constraints": ["dry run only"],
+    "target_hint": {
+      "workspace": "SISO Agent Base",
+      "tab": "research-lane",
+      "role": "research-worker",
+      "task_marker": "TASK-9001"
+    },
+    "minimax_slices": [],
+    "dry_run": true
+  },
+  "duplicate_semantic_action": [
+    {
+      "request_id": "req-semantic-a",
+      "turn_id": "turn-semantic-a",
+      "transcript_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "intent": "status",
+      "goal": "Check the current research lane once",
+      "task_id": "TASK-9001",
+      "risk_tier": "T0",
+      "confirmation": "not_needed",
+      "confidence": 0.98,
+      "constraints": ["dry run only"],
+      "target_hint": {
+        "workspace": "SISO Agent Base",
+        "tab": "research-lane",
+        "role": "research-worker",
+        "task_marker": "TASK-9001"
+      },
+      "minimax_slices": [],
+      "dry_run": true
+    },
+    {
+      "request_id": "req-semantic-b",
+      "turn_id": "turn-semantic-b",
+      "transcript_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "intent": "status",
+      "goal": "Check the current research lane once",
+      "task_id": "TASK-9001",
+      "risk_tier": "T0",
+      "confirmation": "not_needed",
+      "confidence": 0.91,
+      "constraints": ["do not contact live systems"],
+      "target_hint": {
+        "workspace": "SISO Agent Base",
+        "tab": "research-lane",
+        "role": "research-worker",
+        "task_marker": "TASK-9001"
+      },
+      "minimax_slices": [],
+      "dry_run": true
+    }
+  ]
+}
